@@ -4,6 +4,6 @@ export class UpdatePostDto {
   title?: string;
   @IsString()
   description: string;
-@IsNumber()
-  userId:number
+  @IsNumber()
+  userId: number[];
 }

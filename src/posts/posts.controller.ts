@@ -9,12 +9,25 @@ import {
 import { CreatePostDto } from './dtos/createPost.dto';
 import { PostsService } from './posts.service';
 import RequestWithUser from './dtos/requestWithUser.interface';
+import { CreateGroupPostDto } from './dtos/createGroupPost.dto';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
-    @Post()
-  async createPost(@Body() post: CreatePostDto, @Req() req: RequestWithUser) {
-    return this.postsService.createPost(post, req.user);
+  @Post()
+  async createPost(
+    @Body()
+    createPostDto: CreatePostDto,
+  ) {
+    return this.postsService.createPost(createPostDto);
   }
+
+  // @Post('group')
+  // @UsePipes(ValidationPipe)
+  // async createGroupPosts(
+  //   @Body() userId:number[],
+  //   createGroupPostDto: CreateGroupPostDto,
+  // ) {
+  //   // return this.postsService.createPost(createPostDto);
+  // }
 }

@@ -12,8 +12,8 @@ export class UsersService {
         ...data,
         userSetting: {
           create: {
-            notificationOn: true,
-            smsEnabled: false,
+            notificationsOn: true,
+            smsEnable: false,
           },
         },
       },
@@ -21,13 +21,13 @@ export class UsersService {
   }
 
   getUser() {
-    return this.prisma.user.findMany({ include: { userSetting: true } });
+    return this.prisma.user.findMany(); //{ include: { userSetting: true } });
   }
 
   getUserById(id: number) {
     return this.prisma.user.findUnique({
       where: { id },
-      include: { userSetting: true },
+      include: { userSetting: true, posts: true },
     });
   }
 

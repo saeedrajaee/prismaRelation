@@ -8,8 +8,6 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  email: string;
-  name: string;
-  password: string;
-  address?: AddressDto;
+  username: string;
+  displayName: string;
 }

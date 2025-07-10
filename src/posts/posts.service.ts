@@ -1,32 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { CreatePostDto } from './dtos/createPost.dto';
- 
+import { CreateGroupPostDto } from './dtos/createGroupPost.dto';
+
 @Injectable()
 export class PostsService {
   constructor(private readonly prismaService: PrismaService) {}
- 
-   async createPost(post: CreatePostDto, user: User) {
-    const categories = post.categoryIds?.map((category) => ({
-      id: category,
-    }));
 
+  async createPost(data: CreatePostDto) {
     return this.prismaService.post.create({
       data: {
-        ...post,
-        author: {
-          connect: {
-            id: user.id,
-          },
-        },
-        categories: {
-          connect: categories,
-        },
-      },
-      include: {
-        categories: true,
+        ...data,
       },
     });
   }
+
+  // async createGroupPosts(userId:number[],
+  //     createGroupPostDto: Prisma.GroupPost) {
+  //   this.prismaService.groupPost.create({
+  //     data: {
+  //       ...data,
+  //       users: {
+  //         create: [{userId:1},{userId:2}],
+  //       },
+  //     },
+  //   });
+  // }
 }
