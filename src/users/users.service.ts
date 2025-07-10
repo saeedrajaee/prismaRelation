@@ -21,7 +21,7 @@ export class UsersService {
   }
 
   getUser() {
-    return this.prisma.user.findMany(); //{ include: { userSetting: true } });
+    return this.prisma.user.findMany({ include: { userSetting: true, posts: true } });
   }
 
   getUserById(id: number) {
